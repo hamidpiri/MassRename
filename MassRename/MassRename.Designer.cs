@@ -45,6 +45,7 @@ namespace MassRename
             // 
             // listBox1
             // 
+            this.listBox1.AllowDrop = true;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(12, 44);
@@ -52,6 +53,10 @@ namespace MassRename
             this.listBox1.Size = new System.Drawing.Size(1256, 394);
             this.listBox1.TabIndex = 2;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox1_DragDrop);
+            this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox1_DragEnter);
+            this.listBox1.DragOver += new System.Windows.Forms.DragEventHandler(this.listBox1_DragOver);
+            this.listBox1.DragLeave += new System.EventHandler(this.listBox1_DragLeave);
             // 
             // MassRename
             // 

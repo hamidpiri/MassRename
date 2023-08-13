@@ -39,7 +39,28 @@ namespace MassRename
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+        }
+
+        private void listBox1_DragEnter(object sender, DragEventArgs e)
+        {
             MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+        }
+
+        private void listBox1_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void listBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+        }
+
+        private void listBox1_DragLeave(object sender, EventArgs e)
+        {
+            MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+
         }
     }
 
