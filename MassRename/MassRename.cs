@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MassRename
 {
@@ -16,7 +17,6 @@ namespace MassRename
         public MassRename()
         {
             InitializeComponent();
-
         }
 
         private void BrowseBtn_Click(object sender, EventArgs e)
@@ -30,10 +30,21 @@ namespace MassRename
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
 
                     foreach (string filename in files)
-
+                    {
                         listBox1.Items.Add(filename);
+                        listView1.Items.Add(filename);
+                    }
                 }
 
+            }
+        }
+
+        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // If drag start point was location of an item
+            if (GetItemIndex(e.Location) != -1)
+            {
+                listBox1.DoDragDrop(listBox1, DragDropEffects.Move);
             }
         }
 
@@ -58,11 +69,15 @@ namespace MassRename
 
         private void listBox1_DragEnter(object sender, DragEventArgs e)
         {
-            //MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
-
-            //MessageBox.Show(e.X.ToString());
-            //MessageBox.Show(e.Y.ToString());
             Point mouseLocation = listBox1.PointToClient(new Point(e.X, e.Y));
+            if (GetItemIndex(mouseLocation) == listBox1.SelectedIndex)
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.Move;
+            }
         }
 
         private void listBox1_DragOver(object sender, DragEventArgs e)
@@ -72,15 +87,22 @@ namespace MassRename
 
         private void listBox1_DragDrop(object sender, DragEventArgs e)
         {
-
             int selectedIndex = listBox1.SelectedIndex;
+            int dropIndex = GetItemIndex(listBox1.PointToClient(new Point(e.X, e.Y)));
+            if (dropIndex > selectedIndex)
+            {
 
+            }
+            object selectedItem = listBox1.SelectedItem;
+            listBox1.Items.Remove(selectedItem);
         }
 
         private void listBox1_DragLeave(object sender, EventArgs e)
         {
 
         }
+
+
     }
 
 }

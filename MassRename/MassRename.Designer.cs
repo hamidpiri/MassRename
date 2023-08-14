@@ -31,6 +31,7 @@ namespace MassRename
         {
             BrowseBtn = new System.Windows.Forms.Button();
             listBox1 = new System.Windows.Forms.ListBox();
+            listView1 = new System.Windows.Forms.ListView();
             SuspendLayout();
             // 
             // BrowseBtn
@@ -50,17 +51,31 @@ namespace MassRename
             listBox1.ItemHeight = 15;
             listBox1.Location = new System.Drawing.Point(12, 44);
             listBox1.Name = "listBox1";
-            listBox1.Size = new System.Drawing.Size(1256, 394);
+            listBox1.Size = new System.Drawing.Size(669, 394);
             listBox1.TabIndex = 2;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.DragDrop += listBox1_DragDrop;
             listBox1.DragEnter += listBox1_DragEnter;
+            listBox1.MouseDown += listBox1_MouseDown;
+            // 
+            // listView1
+            // 
+            listView1.HideSelection = false;
+            listView1.Location = new System.Drawing.Point(868, 44);
+            listView1.Name = "listView1";
+            listView1.Scrollable = false;
+            listView1.Size = new System.Drawing.Size(250, 359);
+            listView1.TabIndex = 3;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = System.Windows.Forms.View.List;
             // 
             // MassRename
             // 
+            AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1280, 450);
+            Controls.Add(listView1);
             Controls.Add(listBox1);
             Controls.Add(BrowseBtn);
             Name = "MassRename";
@@ -72,6 +87,7 @@ namespace MassRename
 
         private System.Windows.Forms.Button BrowseBtn;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 
