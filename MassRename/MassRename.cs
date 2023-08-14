@@ -29,13 +29,27 @@ namespace MassRename
 
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
 
-                    foreach(string filename in files)
-                    
-                        listBox1.Items.Add(filename);
-                    }
+                    foreach (string filename in files)
 
+                        listBox1.Items.Add(filename);
+                }
+
+            }
+        }
+
+        public int GetItemIndex(Point point)
+        {
+            int itemIndex = 0;
+            for (int index = 0; index < listBox1.Items.Count - 1; index++)
+            {
+                if (listBox1.GetItemRectangle(index).Contains(point))
+                {
+                    itemIndex = index;
+                    break;
                 }
             }
+            return itemIndex;
+        }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -44,7 +58,11 @@ namespace MassRename
 
         private void listBox1_DragEnter(object sender, DragEventArgs e)
         {
-            MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+            //MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+
+            //MessageBox.Show(e.X.ToString());
+            //MessageBox.Show(e.Y.ToString());
+            Point mouseLocation = listBox1.PointToClient(new Point(e.X, e.Y));
         }
 
         private void listBox1_DragOver(object sender, DragEventArgs e)
@@ -54,12 +72,13 @@ namespace MassRename
 
         private void listBox1_DragDrop(object sender, DragEventArgs e)
         {
-            MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
+
+            int selectedIndex = listBox1.SelectedIndex;
+
         }
 
         private void listBox1_DragLeave(object sender, EventArgs e)
         {
-            MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
 
         }
     }
