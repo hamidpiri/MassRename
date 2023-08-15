@@ -14,6 +14,7 @@ namespace MassRename
 {
     public partial class MassRename : Form
     {
+        public string[] files;
         public MassRename()
         {
             InitializeComponent();
@@ -29,10 +30,10 @@ namespace MassRename
 
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
 
-                    foreach (string filename in files)
+                    foreach (string path in files)
                     {
-                        listBox1.Items.Add(filename);
-                        listView1.Items.Add(filename);
+                        string fileName = Path.GetFileName(path);
+                        listBox1.Items.Add(fileName);
                     }
                 }
 
@@ -64,7 +65,6 @@ namespace MassRename
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show(listBox1.Items[listBox1.SelectedIndex].ToString());
         }
 
         private void listBox1_DragEnter(object sender, DragEventArgs e)
@@ -91,10 +91,18 @@ namespace MassRename
             int dropIndex = GetItemIndex(listBox1.PointToClient(new Point(e.X, e.Y)));
             if (dropIndex > selectedIndex)
             {
-
+                dropIndex -= 1;
             }
             object selectedItem = listBox1.SelectedItem;
             listBox1.Items.Remove(selectedItem);
+            if (dropIndex == -1)
+            {
+                listBox1.Items.Add(selectedItem);
+            }
+            else
+            {
+                listBox1.Items.Insert(dropIndex, selectedItem);
+            }
         }
 
         private void listBox1_DragLeave(object sender, EventArgs e)
@@ -102,7 +110,13 @@ namespace MassRename
 
         }
 
+        private void SaveBtn_Click(object sender, EventArgs e)
+        {
+            foreach(object item in listBox1.Items)
+            {
 
+            }
+        }
     }
 
 }
