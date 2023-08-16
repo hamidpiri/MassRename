@@ -32,6 +32,8 @@ namespace MassRename
             BrowseBtn = new System.Windows.Forms.Button();
             listBox1 = new System.Windows.Forms.ListBox();
             SaveBtn = new System.Windows.Forms.Button();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // BrowseBtn
@@ -60,6 +62,7 @@ namespace MassRename
             // 
             // SaveBtn
             // 
+            SaveBtn.Enabled = false;
             SaveBtn.Location = new System.Drawing.Point(351, 11);
             SaveBtn.Name = "SaveBtn";
             SaveBtn.Size = new System.Drawing.Size(89, 23);
@@ -68,17 +71,30 @@ namespace MassRename
             SaveBtn.UseVisualStyleBackColor = true;
             SaveBtn.Click += SaveBtn_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            pictureBox1.Enabled = false;
+            pictureBox1.Location = new System.Drawing.Point(190, 159);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(132, 100);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            // 
             // MassRename
             // 
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(520, 392);
+            Controls.Add(pictureBox1);
             Controls.Add(SaveBtn);
             Controls.Add(listBox1);
             Controls.Add(BrowseBtn);
             Name = "MassRename";
             Text = "MassRename";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -87,6 +103,7 @@ namespace MassRename
         private System.Windows.Forms.Button BrowseBtn;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

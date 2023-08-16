@@ -19,6 +19,7 @@ namespace MassRename
         public MassRename()
         {
             InitializeComponent();
+            pictureBox1.Hide();
         }
 
         private void BrowseBtn_Click(object sender, EventArgs e)
@@ -28,15 +29,23 @@ namespace MassRename
                 DialogResult result = fbd.ShowDialog();
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-
+                    listBox1.Items.Clear();
                     files = Directory.GetFiles(fbd.SelectedPath);
-                    filesPath = Path.GetDirectoryName(files[1]);
+                    try
+                    {
+                        filesPath = Path.GetDirectoryName(files[0]);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
 
                     foreach (string path in files)
                     {
                         string fileName = Path.GetFileName(path);
                         listBox1.Items.Add(fileName);
                     }
+                    SaveBtn.Enabled = true;
                 }
 
             }
@@ -115,11 +124,33 @@ namespace MassRename
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             int index = 1;
-            foreach(object item in listBox1.Items)
+            foreach (object item in listBox1.Items)
             {
                 File.Move(filesPath + "\\" + item.ToString(), filesPath + "\\" + index + "-" + item.ToString());
                 index++;
             }
+            listBox1.Items.Clear();
+
+            showSuccessIcon();
+            Timer timer = new Timer
+            {
+                Interval = 4000
+            };
+            timer.Enabled = true;
+            timer.Tick += new System.EventHandler(OnTimerEvent);
+            SaveBtn.Enabled = false;
+
+        }
+        private void OnTimerEvent(object sender, EventArgs e)
+        {
+            pictureBox1.Hide();
+        }
+
+        private void showSuccessIcon()
+        {
+            pictureBox1.Enabled = true;
+            pictureBox1.Image = Image.FromFile("Resources\\success.png");
+            pictureBox1.Show();
         }
     }
 
