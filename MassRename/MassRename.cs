@@ -15,6 +15,7 @@ namespace MassRename
     public partial class MassRename : Form
     {
         public string[] files;
+        public string filesPath;
         public MassRename()
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace MassRename
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
 
-                    string[] files = Directory.GetFiles(fbd.SelectedPath);
+                    files = Directory.GetFiles(fbd.SelectedPath);
+                    filesPath = Path.GetDirectoryName(files[1]);
 
                     foreach (string path in files)
                     {
@@ -112,9 +114,11 @@ namespace MassRename
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            int index = 1;
             foreach(object item in listBox1.Items)
             {
-
+                File.Move(filesPath + "\\" + item.ToString(), filesPath + "\\" + index + "-" + item.ToString());
+                index++;
             }
         }
     }
